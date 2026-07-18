@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink, Github, PlayCircle } from "lucide-react";
 import { Nav } from "@/components/nav";
-import { projectBySlug, projects } from "@/lib/projects";
+import { projectBySlug, projects, type ProjectDetail as ProjectDetailType } from "@/lib/projects";
 
 export const Route = createFileRoute("/projects/$slug")({
   head: ({ params }) => {
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectDetail() {
-  const { project: p } = Route.useLoaderData();
+  const { project: p } = Route.useLoaderData() as { project: ProjectDetailType };
   const others = projects.filter((x) => x.slug !== p.slug).slice(0, 3);
 
   return (
