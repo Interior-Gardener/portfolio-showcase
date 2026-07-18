@@ -1,4 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
+import { Download, ArrowUpRight } from "lucide-react";
 import kartik from "@/assets/kartik.jpg.asset.json";
 import jsw from "@/assets/jsw.jpg.asset.json";
 import railway from "@/assets/central-railway.jpg.asset.json";
@@ -9,6 +12,7 @@ import jswWork1 from "@/assets/jsw-work-1.jpg.asset.json";
 import jswWork2 from "@/assets/jsw-work-2.jpg.asset.json";
 import resume from "@/assets/resume.pdf.asset.json";
 import { Nav } from "@/components/nav";
+import { projects as projectData } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,24 +40,45 @@ function Index() {
 
 function Hero() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 px-6">
-      <div className="mx-auto max-w-6xl grid md:grid-cols-12 gap-10 items-end">
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 px-6 overflow-hidden">
+      <div className="bg-aurora opacity-70" aria-hidden />
+      <div className="relative z-10 mx-auto max-w-6xl grid md:grid-cols-12 gap-10 items-end">
         <div className="md:col-span-8">
-          <p className="text-mono text-xs uppercase tracking-[0.25em] text-primary mb-6">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-mono text-xs uppercase tracking-[0.25em] text-primary mb-6"
+          >
             ◆ Mumbai, India · Available Summer 2026
-          </p>
-          <h1 className="text-display text-6xl md:text-8xl lg:text-9xl leading-[0.9]">
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-display text-6xl md:text-8xl lg:text-9xl leading-[0.9]"
+          >
             Kartik
             <br />
             <span className="italic text-primary">Verma</span>—
-          </h1>
-          <p className="mt-8 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-8 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
+          >
             Full-stack engineer & AI/ML student building things that ship — from
             steel-plant workflow automation at{" "}
             <span className="text-foreground">JSW</span> to gesture-driven
             heritage exploration in <span className="text-foreground">GeoSwipe</span>.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-10 flex flex-wrap gap-3"
+          >
             <a
               href="#projects"
               className="px-5 py-3 rounded-full bg-primary text-primary-foreground text-sm text-mono uppercase tracking-widest hover:opacity-90 transition"
@@ -62,15 +87,27 @@ function Hero() {
             </a>
             <a
               href={resume.url}
+              download="Kartik_Verma_Resume.pdf"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border text-sm text-mono uppercase tracking-widest hover:border-primary hover:text-primary transition"
+            >
+              <Download className="h-3.5 w-3.5" /> Download Résumé
+            </a>
+            <a
+              href={resume.url}
               target="_blank"
               rel="noreferrer"
-              className="px-5 py-3 rounded-full border border-border text-sm text-mono uppercase tracking-widest hover:border-primary hover:text-primary transition"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border text-sm text-mono uppercase tracking-widest hover:border-primary hover:text-primary transition"
             >
-              Résumé (PDF)
+              View Résumé
             </a>
-          </div>
+          </motion.div>
         </div>
-        <div className="md:col-span-4 relative">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className="md:col-span-4 relative"
+        >
           <div className="aspect-[4/5] relative overflow-hidden rounded-md border border-border">
             <img
               src={kartik.url}
@@ -83,7 +120,7 @@ function Hero() {
             <span>Fig. 01</span>
             <span>B.Tech · CE (AIML Hons)</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -200,61 +237,63 @@ function Work() {
 }
 
 function Projects() {
-  const projects = [
-    {
-      title: "GeoSwipe",
-      tag: "Heritage · Gesture · 3D",
-      blurb: "A full-stack heritage exploration platform with gesture-controlled navigation, real-time multiplayer and Groq Llama 3.3 assistance. Showcased at CIIA-5, Nehru Science Centre.",
-      stack: ["React", "Express", "MongoDB", "Three.js", "Socket.IO", "MediaPipe"],
-      accent: "01",
-    },
-    {
-      title: "Industrial Asset Management",
-      tag: "JSW · Flask · Oracle",
-      blurb: "Roll Shop management platform digitizing asset lifecycle across inventory, grinding, inspection, assembly and reporting — with Excel ingestion and transactional workflows.",
-      stack: ["Flask", "Oracle DB", "SQL", "Pandas"],
-      accent: "02",
-    },
-    {
-      title: "Skill_Verse",
-      tag: "Gamified learning · Realtime",
-      blurb: "Full-stack skill-sharing platform with JWT auth, RBAC, Redis cache-aside, Razorpay payments and Socket.IO for real-time collaborative learning.",
-      stack: ["React", "Node.js", "Express", "MySQL", "Redis", "Razorpay"],
-      accent: "03",
-    },
-  ];
   return (
     <section id="projects" className="px-6 py-24 md:py-32 bg-card/30">
       <div className="mx-auto max-w-6xl">
         <SectionHeader n="02" kicker="Selected work" title="Things I've built." />
         <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((p) => (
-            <article key={p.title} className="group relative p-6 rounded-lg border border-border bg-background hover:border-primary transition">
+          {projectData.map((p, i) => (
+            <motion.div
+              key={p.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+            >
+            <Link
+              to="/projects/$slug"
+              params={{ slug: p.slug }}
+              className="group relative block p-6 rounded-lg border border-border bg-background hover:border-primary hover:-translate-y-1 transition duration-300 h-full"
+            >
               <div className="flex items-start justify-between">
                 <span className="text-mono text-xs text-primary">/{p.accent}</span>
                 <span className="text-mono text-[10px] uppercase tracking-widest text-muted-foreground">{p.tag}</span>
               </div>
-              <h3 className="text-3xl mt-8">{p.title}</h3>
+              <h3 className="text-3xl mt-8 flex items-center gap-2">
+                {p.title}
+                <ArrowUpRight className="h-5 w-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 -translate-x-2 transition-all text-primary" />
+              </h3>
               <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{p.blurb}</p>
               <ul className="mt-6 flex flex-wrap gap-1.5">
-                {p.stack.map((s) => (
+                {p.stack.slice(0, 6).map((s) => (
                   <li key={s} className="text-mono text-[10px] uppercase tracking-wider px-2 py-1 rounded border border-border text-muted-foreground">
                     {s}
                   </li>
                 ))}
               </ul>
-            </article>
+              <span className="mt-6 inline-block text-mono text-[10px] uppercase tracking-widest text-primary">
+                Read case →
+              </span>
+            </Link>
+            </motion.div>
           ))}
         </div>
 
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3">
           {[ciia1, ciia2, jswWork1, jswWork2].map((img, i) => (
-            <div key={i} className="aspect-square overflow-hidden rounded-md border border-border relative group">
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="aspect-square overflow-hidden rounded-md border border-border relative group"
+            >
               <img src={img.url} alt="On-ground work" className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition duration-700" />
               <span className="absolute bottom-2 left-2 text-mono text-[10px] uppercase tracking-widest text-white/90 bg-black/40 px-2 py-0.5 rounded">
                 {["CIIA-5", "GeoSwipe Booth", "JSW Dev", "JSW Team"][i]}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
