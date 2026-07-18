@@ -3,7 +3,8 @@
 // the native driver isn't available (e.g. edge). If MONGODB_URI is unset
 // or connection fails, save operations become no-ops and log a warning.
 
-let cachedClient: unknown = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let cachedClient: any = null;
 let attempted = false;
 
 async function getDb() {
@@ -18,7 +19,6 @@ async function getDb() {
       await client.connect();
       cachedClient = client;
     }
-    // @ts-expect-error dynamic
     return cachedClient.db(process.env.MONGODB_DB || "portfolio");
   } catch (err) {
     console.warn("[mongo] connection unavailable:", (err as Error).message);
@@ -41,7 +41,6 @@ export async function saveDonation(record: {
   try {
     const db = await getDb();
     if (!db) return;
-    // @ts-expect-error dynamic
     await db.collection("donations").insertOne(record);
   } catch (err) {
     console.warn("[mongo] saveDonation failed:", (err as Error).message);
@@ -52,7 +51,6 @@ export async function updateDonation(orderId: string, patch: Record<string, unkn
   try {
     const db = await getDb();
     if (!db) return;
-    // @ts-expect-error dynamic
     await db.collection("donations").updateOne({ orderId }, { $set: patch });
   } catch (err) {
     console.warn("[mongo] updateDonation failed:", (err as Error).message);
