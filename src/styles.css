@@ -191,13 +191,13 @@ html.light { color-scheme: light; }
 
 @utility grain {
   position: relative;
-}
-@utility grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(oklch(1 0 0 / 3%) 1px, transparent 1px);
-  background-size: 3px 3px;
-  mix-blend-mode: overlay;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(oklch(1 0 0 / 3%) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: overlay;
+  }
 }
