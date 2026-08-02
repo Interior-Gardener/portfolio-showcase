@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Toaster } from "sonner";
 import { createRazorpayOrder, verifyRazorpayPayment } from "@/lib/razorpay.functions";
-import upiQr from "@/assets/upi-qr.jpg.asset.json";
+import upiQr from "@/assets/upi-qr.jpg";
 import { Nav } from "@/components/nav";
 
 declare global {
@@ -182,7 +182,7 @@ function SupportPage() {
             <div className="md:col-span-2 p-6 rounded-lg border border-border bg-card/40">
               <p className="text-mono text-[10px] uppercase tracking-[0.25em] text-primary">Or scan · UPI</p>
               <div className="mt-4 aspect-square rounded-md overflow-hidden bg-white p-2">
-                <img src={upiQr.url} alt="UPI QR" className="h-full w-full object-contain" />
+                <img src={upiQr} alt="UPI QR" className="h-full w-full object-contain" />
               </div>
               <p className="mt-4 text-mono text-xs text-muted-foreground break-all">
                 kartikverma2204@okhdfcbank
