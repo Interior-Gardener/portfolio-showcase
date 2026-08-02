@@ -2,22 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Download, ArrowUpRight } from "lucide-react";
-import kartik from "@/assets/kartik.jpg.asset.json";
-import jsw from "@/assets/jsw.jpg.asset.json";
-import railway from "@/assets/central-railway.jpg.asset.json";
-import somaiya from "@/assets/somaiya.jpg.asset.json";
-import ciia1 from "@/assets/ciia-1.jpg.asset.json";
-import ciia2 from "@/assets/ciia-2.jpg.asset.json";
-import jswWork1 from "@/assets/jsw-work-1.jpg.asset.json";
-import jswWork2 from "@/assets/jsw-work-2.jpg.asset.json";
-import resume from "@/assets/resume.pdf.asset.json";
+import kartik from "@/assets/kartik.jpg";
+import jsw from "@/assets/jsw.jpg";
+import railway from "@/assets/central-railway.jpg";
+import somaiya from "@/assets/somaiya.jpg";
+import ciia1 from "@/assets/ciia-1.jpg";
+import ciia2 from "@/assets/ciia-2.jpg";
+import jswWork1 from "@/assets/jsw-work-1.jpg";
+import jswWork2 from "@/assets/jsw-work-2.jpg";
+import resume from "@/assets/resume.pdf?url";
 import { Nav } from "@/components/nav";
 import { projects as projectData } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [{ property: "og:image", content: kartik.url }],
-  }),
   component: Index,
 });
 
@@ -86,14 +83,14 @@ function Hero() {
               See projects →
             </a>
             <a
-              href={resume.url}
+              href={resume}
               download="Kartik_Verma_Resume.pdf"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border text-sm text-mono uppercase tracking-widest hover:border-primary hover:text-primary transition"
             >
               <Download className="h-3.5 w-3.5" /> Download Résumé
             </a>
             <a
-              href={resume.url}
+              href={resume}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border text-sm text-mono uppercase tracking-widest hover:border-primary hover:text-primary transition"
@@ -110,7 +107,7 @@ function Hero() {
         >
           <div className="aspect-[4/5] relative overflow-hidden rounded-md border border-border">
             <img
-              src={kartik.url}
+              src={kartik}
               alt="Kartik Verma"
               className="absolute inset-0 h-full w-full object-cover grayscale hover:grayscale-0 transition duration-700"
             />
@@ -162,7 +159,7 @@ function SectionHeader({ n, kicker, title }: { n: string; kicker: string; title:
 function Work() {
   const roles = [
     {
-      logo: jsw.url,
+      logo: jsw,
       company: "JSW Steel",
       role: "Software Developer Intern · On-site",
       when: "Jun 2025 — Jul 2025",
@@ -182,7 +179,7 @@ function Work() {
       ],
     },
     {
-      logo: railway.url,
+      logo: railway,
       company: "Central Railway",
       role: "Technical Intern · On-site",
       when: "Jul 2024 — Aug 2024",
@@ -289,7 +286,7 @@ function Projects() {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="aspect-square overflow-hidden rounded-md border border-border relative group"
             >
-              <img src={img.url} alt="On-ground work" className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition duration-700" />
+              <img src={img} alt="On-ground work" className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition duration-700" />
               <span className="absolute bottom-2 left-2 text-mono text-[10px] uppercase tracking-widest text-white/90 bg-black/40 px-2 py-0.5 rounded">
                 {["CIIA-5", "GeoSwipe Booth", "JSW Dev", "JSW Team"][i]}
               </span>
@@ -309,7 +306,7 @@ function About() {
           <SectionHeader n="03" kicker="About" title="Hi — I'm Kartik." />
           <div className="flex items-center gap-4 mt-6">
             <div className="h-16 w-16 rounded-md bg-white p-2 flex items-center justify-center">
-              <img src={somaiya.url} alt="Somaiya" className="max-h-full max-w-full object-contain" />
+              <img src={somaiya} alt="Somaiya" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="text-sm">
               <p className="text-foreground">K. J. Somaiya Institute of Technology</p>
@@ -396,8 +393,8 @@ function Contact() {
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           {[
             { k: "Email", v: "kartikverma2204@gmail.com", href: "mailto:kartikverma2204@gmail.com" },
-            { k: "Phone", v: "+91 8421305465", href: "tel:+918421305465" },
-            { k: "GitHub", v: "@kartikverma2204", href: "https://github.com/kartikverma2204" },
+            { k: "LinkedIn", v: "in/kartikverma2204", href: "https://www.linkedin.com/in/kartikverma2204" },
+            { k: "GitHub", v: "@Interior-Gardener", href: "https://github.com/Interior-Gardener" },
           ].map((c) => (
             <a key={c.k} href={c.href} target="_blank" rel="noreferrer" className="p-6 rounded-lg border border-border hover:border-primary hover:bg-background transition group">
               <p className="text-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">{c.k}</p>
