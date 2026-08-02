@@ -24,7 +24,7 @@ export const Route = createFileRoute("/projects/$slug")({
   },
   component: ProjectDetail,
   notFoundComponent: () => (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen text-foreground">
       <Nav />
       <div className="pt-40 text-center">
         <p className="text-mono text-xs uppercase tracking-[0.25em] text-primary">404</p>
@@ -42,7 +42,7 @@ function ProjectDetail() {
   const others = projects.filter((x) => x.slug !== p.slug).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen text-foreground overflow-x-hidden">
       <Nav />
       <div className="relative">
         <div className="bg-aurora opacity-70" aria-hidden />
