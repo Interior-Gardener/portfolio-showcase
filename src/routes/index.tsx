@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen text-foreground overflow-x-hidden">
       <Nav />
       <Hero />
       <Marquee />
@@ -250,7 +250,7 @@ function Projects() {
             <Link
               to="/projects/$slug"
               params={{ slug: p.slug }}
-              className="group relative block p-6 rounded-lg border border-border bg-background hover:border-primary hover:-translate-y-1 transition duration-300 h-full"
+              className="group relative block p-6 rounded-lg border border-border bg-card/40 backdrop-blur-sm hover:border-primary hover:-translate-y-1 transition duration-300 h-full"
             >
               <div className="flex items-start justify-between">
                 <span className="text-mono text-xs text-primary">/{p.accent}</span>

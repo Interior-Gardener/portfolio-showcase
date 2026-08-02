@@ -96,7 +96,7 @@ function SupportPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen text-foreground">
       <Nav />
       <Toaster theme="dark" position="top-center" />
       <section className="pt-32 pb-24 px-6">
