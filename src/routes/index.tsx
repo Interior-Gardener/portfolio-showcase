@@ -12,6 +12,7 @@ import jswWork1 from "@/assets/jsw-work-1.jpg";
 import jswWork2 from "@/assets/jsw-work-2.jpg";
 import resume from "@/assets/resume.pdf?url";
 import { Nav } from "@/components/nav";
+import { SceneMount } from "@/components/three/scene-mount";
 import { projects as projectData } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
@@ -39,6 +40,7 @@ function Hero() {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 px-6 overflow-hidden">
       <div className="bg-aurora opacity-70" aria-hidden />
+      <SceneMount variant="globe" className="opacity-70 [mask-image:radial-gradient(70%_70%_at_50%_45%,black,transparent)]" />
       <div className="relative z-10 mx-auto max-w-6xl grid md:grid-cols-12 gap-10 items-end">
         <div className="md:col-span-8">
           <motion.p
