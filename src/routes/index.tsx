@@ -192,8 +192,12 @@ function Work() {
     },
   ];
   return (
-    <section id="work" className="px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-6xl">
+    <section id="work" className="relative px-6 py-24 md:py-32 overflow-hidden">
+      <SceneMount
+        variant="lattice"
+        className="opacity-40 [mask-image:linear-gradient(to_bottom,transparent,black_35%,transparent)]"
+      />
+      <div className="relative z-10 mx-auto max-w-6xl">
         <SectionHeader n="01" kicker="Experience" title="Where I've worked." />
         <ol className="space-y-2">
           {roles.map((r, i) => (
