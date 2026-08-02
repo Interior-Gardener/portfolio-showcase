@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink, Github, PlayCircle } from "lucide-react";
 import { Nav } from "@/components/nav";
+import { SceneMount } from "@/components/three/scene-mount";
 import { projectBySlug, projects, type ProjectDetail as ProjectDetailType } from "@/lib/projects";
 
 export const Route = createFileRoute("/projects/$slug")({
@@ -44,8 +45,12 @@ function ProjectDetail() {
   return (
     <div className="min-h-screen text-foreground overflow-x-hidden">
       <Nav />
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <div className="bg-aurora opacity-70" aria-hidden />
+        <SceneMount
+          variant={p.slug === "geoswipe" ? "globe" : "lattice"}
+          className="opacity-50 [mask-image:radial-gradient(65%_65%_at_60%_35%,black,transparent)]"
+        />
         <section className="relative z-10 pt-32 pb-16 md:pt-40 md:pb-24 px-6">
           <div className="mx-auto max-w-5xl">
             <Link
