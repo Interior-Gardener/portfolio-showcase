@@ -3,11 +3,11 @@
 // Why this exists: `vite dev` reads .env once at startup, so editing MONGODB_URI
 // while the dev server is running left the old (localhost) value in process.env
 // and donations kept landing in the local database. Here we re-read the dotenv
-// files on every call (dev/Node only) so the file is always the source of truth,
-// and we honour Vite's precedence: .env.local overrides .env.
+// files (dev/Node only) so the file is always the source of truth, honouring
+// Vite's precedence: .env.local overrides .env.
 //
-// On the edge/Worker runtime there is no dotenv file to read; the fs import
-// simply fails and we fall back to process.env.
+// On the edge/Worker runtime there is no dotenv file; the read fails and we
+// fall back to process.env.
 
 let cache: { at: number; vals: Record<string, string> } | null = null;
 
@@ -18,13 +18,11 @@ function parse(text: string, out: Record<string, string>) {
   }
 }
 
-function fileEnv(): Record<string, string> {
+async function fileEnv(): Promise<Record<string, string>> {
   if (cache && Date.now() - cache.at < 1000) return cache.vals;
   const vals: Record<string, string> = {};
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const fs = require("node:fs") as typeof import("node:fs");
-    // .env first, then .env.local so the latter wins (same as Vite).
+    const fs = await import("node:fs");
     for (const f of [".env", ".env.local"]) {
       if (fs.existsSync(f)) parse(fs.readFileSync(f, "utf8"), vals);
     }
@@ -35,8 +33,8 @@ function fileEnv(): Record<string, string> {
   return vals;
 }
 
-export function env(name: string): string | undefined {
-  const v = fileEnv()[name];
+export async function env(name: string): Promise<string | undefined> {
+  const v = (await fileEnv())[name];
   if (v !== undefined && v !== "") return v;
   const p = process.env[name];
   return p && p !== "" ? p : undefined;
