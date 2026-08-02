@@ -6,8 +6,8 @@
 // Creates: database, all collections, JSON-schema validation and indexes.
 import { readFileSync, existsSync } from "node:fs";
 
-// --- minimal .env loader (.env wins over .env.local) -----------------------
-for (const file of [".env.local", ".env"]) {
+// --- minimal .env loader (.env.local wins, same precedence as Vite) --------
+for (const file of [".env", ".env.local"]) {
   if (!existsSync(file)) continue;
   for (const line of readFileSync(file, "utf8").split("\n")) {
     const m = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$/);
@@ -30,6 +30,8 @@ function bail(msg) {
 }
 
 if (!uri) bail("MONGODB_URI is not set in .env");
+
+console.log(`[db:init] target → ${uri.replace(/\/\/[^@]*@/, "//***@")} db=${dbName}`);
 
 // --- schema definition: everything the app needs ---------------------------
 const collections = [
