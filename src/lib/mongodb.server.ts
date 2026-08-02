@@ -1,30 +1,32 @@
 // Server-only MongoDB helper.
-// Uses a dynamic import + try/catch so builds succeed on runtimes where
-// the native driver isn't available (e.g. edge). If MONGODB_URI is unset
-// or connection fails, save operations become no-ops and log a warning.
+// The native `mongodb` driver opens raw TCP sockets and cannot run in the
+// edge/Worker runtime this app deploys to, so persistence goes through the
+// MongoDB Atlas Data API over plain fetch instead. Configure via env:
+//   MONGODB_DATA_API_URL   e.g. https://data.mongodb-api.com/app/<app-id>/endpoint/data/v1
+//   MONGODB_DATA_API_KEY   Atlas Data API key
+//   MONGODB_DATA_SOURCE    Atlas cluster name (default: Cluster0)
+//   MONGODB_DB             database name (default: portfolio)
+// If these are unset, every helper is a graceful no-op.
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let cachedClient: any = null;
-let attempted = false;
-
-async function getDb() {
-  const uri = process.env.MONGODB_URI;
-  if (!uri) return null;
-  if (attempted && !cachedClient) return null;
-  attempted = true;
-  try {
-    const { MongoClient } = await import("mongodb");
-    if (!cachedClient) {
-      const client = new MongoClient(uri);
-      await client.connect();
-      cachedClient = client;
-    }
-    return cachedClient.db(process.env.MONGODB_DB || "portfolio");
-  } catch (err) {
-    console.warn("[mongo] connection unavailable:", (err as Error).message);
-    cachedClient = null;
+async function dataApi(action: string, body: Record<string, unknown>) {
+  const base = process.env.MONGODB_DATA_API_URL;
+  const key = process.env.MONGODB_DATA_API_KEY;
+  if (!base || !key) {
+    console.warn("[mongo] connection unavailable: Data API env vars not set");
     return null;
   }
+  const res = await fetch(`${base.replace(/\/$/, "")}/action/${action}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apiKey: key },
+    body: JSON.stringify({
+      dataSource: process.env.MONGODB_DATA_SOURCE || "Cluster0",
+      database: process.env.MONGODB_DB || "portfolio",
+      collection: "donations",
+      ...body,
+    }),
+  });
+  if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+  return res.json();
 }
 
 export async function saveDonation(record: {
@@ -39,9 +41,9 @@ export async function saveDonation(record: {
   createdAt: Date;
 }) {
   try {
-    const db = await getDb();
-    if (!db) return;
-    await db.collection("donations").insertOne(record);
+    await dataApi("insertOne", {
+      document: { ...record, createdAt: record.createdAt.toISOString() },
+    });
   } catch (err) {
     console.warn("[mongo] saveDonation failed:", (err as Error).message);
   }
@@ -49,9 +51,7 @@ export async function saveDonation(record: {
 
 export async function updateDonation(orderId: string, patch: Record<string, unknown>) {
   try {
-    const db = await getDb();
-    if (!db) return;
-    await db.collection("donations").updateOne({ orderId }, { $set: patch });
+    await dataApi("updateOne", { filter: { orderId }, update: { $set: patch } });
   } catch (err) {
     console.warn("[mongo] updateDonation failed:", (err as Error).message);
   }
