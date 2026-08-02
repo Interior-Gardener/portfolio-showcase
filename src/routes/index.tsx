@@ -15,9 +15,6 @@ import { Nav } from "@/components/nav";
 import { projects as projectData } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [{ property: "og:image", content: kartik }],
-  }),
   component: Index,
 });
 
