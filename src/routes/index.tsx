@@ -250,18 +250,21 @@ function Work() {
 }
 
 function Projects() {
+  const featured = projectData.slice(0, 5);
+  const rest = projectData.slice(5);
   return (
     <section id="projects" className="px-6 py-24 md:py-32 bg-card/30">
       <div className="mx-auto max-w-6xl">
-        <SectionHeader n="02" kicker="Selected work" title="Things I've built." />
+        <SectionHeader n="02" kicker="Top 5 projects" title="Things I've built." />
         <div className="grid md:grid-cols-3 gap-6">
-          {projectData.map((p, i) => (
+          {featured.map((p, i) => (
             <motion.div
               key={p.slug}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+              className={i < 2 ? "md:col-span-3 lg:col-span-3" : ""}
             >
             <Link
               to="/projects/$slug"
@@ -284,13 +287,44 @@ function Projects() {
                   </li>
                 ))}
               </ul>
-              <span className="mt-6 inline-block text-mono text-[10px] uppercase tracking-widest text-primary">
-                Read case →
-              </span>
+              <div className="mt-6 flex items-center gap-4">
+                <span className="text-mono text-[10px] uppercase tracking-widest text-primary">Read case →</span>
+                <span
+                  role="link"
+                  tabIndex={0}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open(p.repo, "_blank", "noopener");
+                  }}
+                  className="text-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-primary transition cursor-pointer"
+                >
+                  GitHub ↗
+                </span>
+              </div>
             </Link>
             </motion.div>
           ))}
         </div>
+
+        {rest.length > 0 && (
+          <div className="mt-10">
+            <p className="text-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Also built</p>
+            <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {rest.map((p) => (
+                <Link
+                  key={p.slug}
+                  to="/projects/$slug"
+                  params={{ slug: p.slug }}
+                  className="group flex items-center justify-between gap-3 px-4 py-3 rounded-lg border border-border bg-background/40 hover:border-primary transition"
+                >
+                  <span className="text-sm">{p.title}</span>
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3">
           {[ciia1, ciia2, jswWork1, jswWork2].map((img, i) => (
