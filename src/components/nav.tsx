@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { useTheme } from "@/lib/theme";
 import { Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
+import logoDark from "@/assets/kv-logo-dark.png";
+import logoLight from "@/assets/kv-logo-light.png";
 
 const links = [
   { href: "/#work", label: "Work" },
@@ -20,8 +22,12 @@ export function Nav() {
       className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border"
     >
       <nav className="mx-auto max-w-6xl px-6 h-14 flex items-center justify-between">
-        <Link to="/" className="text-mono text-xs uppercase tracking-[0.2em] text-foreground">
-          KV<span className="text-primary">.</span>
+        <Link to="/" aria-label="Kartik Verma — home" className="flex items-center">
+          <img
+            src={theme === "dark" ? logoDark : logoLight}
+            alt="Kartik Verma"
+            className="h-9 md:h-10 w-auto object-contain"
+          />
         </Link>
         <ul className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
           {links.map((l) => (

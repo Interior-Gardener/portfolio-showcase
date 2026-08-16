@@ -10,6 +10,7 @@ import ciia1 from "@/assets/ciia-1.jpg";
 import ciia2 from "@/assets/ciia-2.jpg";
 import jswWork1 from "@/assets/jsw-work-1.jpg";
 import jswWork2 from "@/assets/jsw-work-2.jpg";
+import strawHat from "@/assets/straw-hat-kv.png";
 import resume from "@/assets/resume.pdf?url";
 import { Nav } from "@/components/nav";
 import { SceneMount } from "@/components/three/scene-mount";
@@ -28,6 +29,7 @@ function Index() {
       <Work />
       <Projects />
       <About />
+      <Crew />
       <Skills />
       <Achievements />
       <Contact />
@@ -341,6 +343,57 @@ function About() {
             <em className="text-primary">badminton</em>, and I represented KJSIT & Mumbai
             University at the All India University Matches 2025-26.
           </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Crew() {
+  const values = [
+    { k: "Crew over solo", v: "The best builds I've shipped — GeoSwipe, the JSW Roll Shop app — happened with a crew arguing over a whiteboard at 1am." },
+    { k: "Set sail anyway", v: "Unknown stack, unfamiliar domain, half a map? Good. That's usually where the interesting problems live." },
+    { k: "Never drop the dream", v: "Luffy's rule: say the goal out loud, then keep rowing until it's real." },
+  ];
+  return (
+    <section className="px-6 py-24 md:py-32 border-t border-border">
+      <div className="mx-auto max-w-6xl grid md:grid-cols-12 gap-12 items-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94, rotate: -4 }}
+          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="md:col-span-5"
+        >
+          <img
+            src={strawHat}
+            alt="Kartik Verma illustrated with the Straw Hat crew"
+            className="w-full max-w-sm mx-auto drop-shadow-2xl"
+            loading="lazy"
+          />
+        </motion.div>
+        <div className="md:col-span-7">
+          <p className="text-mono text-xs uppercase tracking-[0.25em] text-primary">
+            ◆ — Off the clock
+          </p>
+          <h2 className="text-display text-5xl md:text-6xl mt-3">
+            Building ideas.
+            <br />
+            <span className="italic text-primary">Creating impact.</span>
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-foreground/90 max-w-2xl">
+            I'm a lifelong One Piece fan, and honestly it shaped how I work more than
+            any framework did. Every project I've shipped has felt like a small voyage:
+            an ambitious goal, an unfamiliar sea, and a crew worth showing up for.
+          </p>
+          <ul className="mt-8 grid sm:grid-cols-3 gap-6">
+            {values.map((v) => (
+              <li key={v.k}>
+                <p className="text-mono text-[10px] uppercase tracking-[0.2em] text-primary">{v.k}</p>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{v.v}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
