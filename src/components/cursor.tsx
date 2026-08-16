@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * A soft, spring-trailing custom cursor:
- *  - a small solid dot that tracks the pointer exactly
- *  - a larger ring that lags behind with easing
- *  - the ring expands + fills on interactive elements
+ * Ghost-trail cursor: a leading "face" ghost that tracks the pointer, followed by
+ * 19 progressively smaller, slower ghosts that lag behind with easing transitions.
+ * Scaled and themed to the site's ember/primary palette.
  * Disabled on touch devices and when reduced motion is requested.
  */
+const COUNT = 20;
+const LEAD_SIZE = 30; // px
+
 export function Cursor() {
-  const dotRef = useRef<HTMLDivElement | null>(null);
-  const ringRef = useRef<HTMLDivElement | null>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const [enabled, setEnabled] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [pressed, setPressed] = useState(false);
@@ -26,42 +27,30 @@ export function Cursor() {
 
   useEffect(() => {
     if (!enabled) return;
-
-    let x = window.innerWidth / 2;
-    let y = window.innerHeight / 2;
-    let rx = x;
-    let ry = y;
-    let frame = 0;
-
-    const interactive = "a, button, [role='button'], input, textarea, select, label, summary, [data-cursor='hover']";
+    const interactive =
+      "a, button, [role='button'], input, textarea, select, label, summary, [data-cursor='hover']";
 
     const onMove = (e: PointerEvent) => {
-      x = e.clientX;
-      y = e.clientY;
       setVisible(true);
       const target = e.target as Element | null;
       setHovering(Boolean(target?.closest?.(interactive)));
+      const nodes = rootRef.current?.children;
+      if (!nodes) return;
+      for (let i = 0; i < nodes.length; i++) {
+        const el = nodes[i] as HTMLElement;
+        el.style.left = `${e.clientX}px`;
+        el.style.top = `${e.clientY}px`;
+      }
     };
     const onLeave = () => setVisible(false);
     const onDown = () => setPressed(true);
     const onUp = () => setPressed(false);
 
-    const loop = () => {
-      rx += (x - rx) * 0.16;
-      ry += (y - ry) * 0.16;
-      if (dotRef.current) dotRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-      if (ringRef.current) ringRef.current.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
-      frame = requestAnimationFrame(loop);
-    };
-    frame = requestAnimationFrame(loop);
-
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("pointerdown", onDown, { passive: true });
     window.addEventListener("pointerup", onUp, { passive: true });
     document.addEventListener("pointerleave", onLeave);
-
     return () => {
-      cancelAnimationFrame(frame);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);
@@ -71,38 +60,55 @@ export function Cursor() {
 
   if (!enabled) return null;
 
+  const scale = pressed ? 0.85 : hovering ? 1.25 : 1;
+
   return (
     <div
       aria-hidden
+      ref={rootRef}
       className="pointer-events-none fixed inset-0 z-[9999] hidden md:block"
-      style={{ opacity: visible ? 1 : 0, transition: "opacity 200ms ease" }}
+      style={{ opacity: visible ? 1 : 0, transition: "opacity 250ms ease" }}
     >
-      <div
-        ref={ringRef}
-        className="absolute left-0 top-0 rounded-full border border-primary/60"
-        style={{
-          width: hovering ? 52 : 32,
-          height: hovering ? 52 : 32,
-          backgroundColor: hovering ? "color-mix(in oklab, var(--color-primary) 14%, transparent)" : "transparent",
-          backdropFilter: hovering ? "invert(4%)" : "none",
-          transform: "translate3d(-100px,-100px,0)",
-          transition:
-            "width 260ms cubic-bezier(.2,.9,.3,1), height 260ms cubic-bezier(.2,.9,.3,1), background-color 260ms ease, border-color 260ms ease",
-          willChange: "transform, width, height",
-        }}
-      />
-      <div
-        ref={dotRef}
-        className="absolute left-0 top-0 rounded-full bg-primary"
-        style={{
-          width: pressed ? 5 : hovering ? 4 : 7,
-          height: pressed ? 5 : hovering ? 4 : 7,
-          boxShadow: "0 0 12px color-mix(in oklab, var(--color-primary) 60%, transparent)",
-          transform: "translate3d(-100px,-100px,0)",
-          transition: "width 180ms ease, height 180ms ease",
-          willChange: "transform",
-        }}
-      />
+      {Array.from({ length: COUNT }).map((_, i) => {
+        const size = (LEAD_SIZE - i * 1.2) * scale;
+        const mix = 100 - i * 4;
+        return (
+          <div
+            key={i}
+            className="kv-ghost"
+            style={{
+              width: size,
+              height: size,
+              marginLeft: -size / 2,
+              marginTop: -size / 2,
+              zIndex: COUNT - i,
+              background:
+                i === 0
+                  ? "var(--color-primary)"
+                  : `color-mix(in oklab, var(--color-primary) ${mix}%, var(--color-muted-foreground))`,
+              opacity: i === 0 ? 0.95 : Math.max(0.08, 0.7 - i * 0.032),
+              boxShadow:
+                i === 0
+                  ? "0 0 18px color-mix(in oklab, var(--color-primary) 55%, transparent)"
+                  : "none",
+              transition: `left ${(i * 0.05).toFixed(2)}s cubic-bezier(.175,.885,.32,1.275), top ${(i * 0.05).toFixed(2)}s cubic-bezier(.175,.885,.32,1.275), width 220ms ease, height 220ms ease, margin 220ms ease`,
+              animationDelay: `${(i / 30).toFixed(3)}s`,
+            }}
+          >
+            {i === 0 && (
+              <>
+                <div className="kv-arms">
+                  <div className="kv-arm" />
+                  <div className="kv-arm" />
+                </div>
+                <div className="kv-inner">
+                  <div className="kv-mouth" />
+                </div>
+              </>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
