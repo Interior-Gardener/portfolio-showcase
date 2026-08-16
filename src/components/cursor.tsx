@@ -79,8 +79,8 @@ export function Cursor() {
             style={{
               width: size,
               height: size,
-              marginLeft: -size / 2,
-              marginTop: -size / 2,
+              marginLeft: -size / 2 + 13,
+              marginTop: -size / 2 + 13,
               zIndex: COUNT - i,
               background:
                 i === 0
@@ -109,6 +109,21 @@ export function Cursor() {
           </div>
         );
       })}
+      {/* precise aim dot at the exact pointer position */}
+      <div
+        className="kv-ghost"
+        style={{
+          width: pressed ? 4 : 6,
+          height: pressed ? 4 : 6,
+          marginLeft: pressed ? -2 : -3,
+          marginTop: pressed ? -2 : -3,
+          zIndex: COUNT + 1,
+          background: "var(--color-foreground)",
+          boxShadow: "0 0 8px color-mix(in oklab, var(--color-primary) 70%, transparent)",
+          animation: "none",
+          transition: "width 150ms ease, height 150ms ease, margin 150ms ease",
+        }}
+      />
     </div>
   );
 }
