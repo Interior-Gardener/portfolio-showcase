@@ -79,8 +79,8 @@ export function Cursor() {
             style={{
               width: size,
               height: size,
-              marginLeft: -size / 2,
-              marginTop: -size / 2,
+              marginLeft: -size / 2 + 13,
+              marginTop: -size / 2 + 13,
               zIndex: COUNT - i,
               background:
                 i === 0
