@@ -374,7 +374,7 @@ function Crew() {
         </motion.div>
         <div className="md:col-span-7">
           <p className="text-mono text-xs uppercase tracking-[0.25em] text-primary">
-            04 — Off the clock
+            ◆ — Off the clock
           </p>
           <h2 className="text-display text-5xl md:text-6xl mt-3">
             Building ideas.
