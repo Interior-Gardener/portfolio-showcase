@@ -80,7 +80,7 @@ export const verifyRazorpayPayment = createServerFn({ method: "POST" })
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
     if (!keySecret) throw new Error("Razorpay secret not configured");
 
-    const { createHmac } = await import("crypto");
+    const { createHmac } = await import("node:crypto");
     const expected = createHmac("sha256", keySecret)
       .update(`${data.orderId}|${data.paymentId}`)
       .digest("hex");

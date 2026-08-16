@@ -89,12 +89,20 @@ try {
       console.log(`[db:init] created collection  ${dbName}.${spec.name}`);
     } else if (spec.validator) {
       // keep validation rules up to date on re-runs
-      await db.command({
-        collMod: spec.name,
-        validator: spec.validator,
-        validationLevel: "moderate",
-      });
-      console.log(`[db:init] updated validator   ${dbName}.${spec.name}`);
+      try {
+        await db.command({
+          collMod: spec.name,
+          validator: spec.validator,
+          validationLevel: "moderate",
+        });
+        console.log(`[db:init] updated validator   ${dbName}.${spec.name}`);
+      } catch (err) {
+        if (err.code === 13 || (err.message && err.message.includes("not allowed to do action [collMod]"))) {
+          console.warn(`[db:init] collMod not permitted on ${dbName}.${spec.name} - skipping validator update.`);
+        } else {
+          throw err;
+        }
+      }
     }
 
     if (spec.indexes?.length) {
