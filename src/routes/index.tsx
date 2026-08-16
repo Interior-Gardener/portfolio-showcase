@@ -10,6 +10,7 @@ import ciia1 from "@/assets/ciia-1.jpg";
 import ciia2 from "@/assets/ciia-2.jpg";
 import jswWork1 from "@/assets/jsw-work-1.jpg";
 import jswWork2 from "@/assets/jsw-work-2.jpg";
+import strawHat from "@/assets/straw-hat-kv.png";
 import resume from "@/assets/resume.pdf?url";
 import { Nav } from "@/components/nav";
 import { SceneMount } from "@/components/three/scene-mount";
@@ -28,6 +29,7 @@ function Index() {
       <Work />
       <Projects />
       <About />
+      <Crew />
       <Skills />
       <Achievements />
       <Contact />
