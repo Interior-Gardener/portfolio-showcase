@@ -70,6 +70,86 @@ export const projects: ProjectDetail[] = [
     accent: "02",
   },
   {
+    slug: "atomix",
+    title: "Atomix",
+    tag: "VR · Unity · AI chemistry lab",
+    blurb:
+      "A virtual-reality chemistry laboratory where you run real reactions safely — built in Unity with an AI lab companion.",
+    overview:
+      "Atomix turns a chemistry lab into a room you can walk into. Built in Unity with C# and custom ShaderLab/HLSL shaders, it lets students pick up apparatus, mix reagents and watch reactions play out with physically-styled visual effects — no fume hood, no risk, no consumable cost. An AI assistant sits alongside the bench to explain what is happening, suggest the next step and answer 'what if I add more of this?' questions in-context, making it a personal laboratory rather than a scripted demo.",
+    role: "Unity / XR developer — interaction systems, shaders, AI companion",
+    year: "2025",
+    stack: ["Unity", "C#", "ShaderLab", "HLSL", "XR Interaction Toolkit", "AI assistant"],
+    features: [
+      "Room-scale VR lab with grabbable apparatus and reagents",
+      "Reaction simulation with custom shader-driven visual effects",
+      "AI lab companion that explains reactions and guides experiments",
+      "Safe, repeatable experiments with zero consumable cost",
+      "Built for headset-grade performance with optimised HLSL shaders",
+    ],
+    highlights: [
+      { k: "Medium", v: "Immersive VR, built in Unity" },
+      { k: "Graphics", v: "Custom ShaderLab + HLSL reaction FX" },
+      { k: "Why", v: "Lab access without lab risk or cost" },
+    ],
+    repo: "https://github.com/Interior-Gardener/Atomix",
+    demo: "https://drive.google.com/file/d/1W_kMqp_5rlrAXLKSB6BcBMAyuCfBuZzr/view",
+    accent: "03",
+  },
+  {
+    slug: "hospital-operations-sync-platform",
+    title: "Hospital Operations Sync Platform",
+    tag: "Civic health · Django · Realtime ops",
+    blurb:
+      "Software syncing hospital operations for a healthier city — live beds, smart OPD queues and inter-hospital capacity sharing.",
+    overview:
+      "Most hospital delays are not clinical, they are logistical: a queue nobody can see, a free bed nobody knows about. This platform ingests real-time operational data and turns it into decisions — dynamic OPD queue prioritisation from live check-ins and historical averages, a live bed-availability board per department, a rule-based admission workflow that matches patient needs to open beds, and APIs that share anonymised capacity with a city-wide health dashboard so ambulances stop guessing. A React front end sits on a Django REST Framework backend with MySQL.",
+    role: "Full-stack engineer — backend APIs, dashboards, workflow rules",
+    year: "2026",
+    stack: ["React", "Django REST Framework", "Python", "MySQL", "REST APIs"],
+    features: [
+      "Dynamic OPD queue management from live check-in data",
+      "Live bed-availability dashboard with admission/discharge updates",
+      "Rule-based admission workflow matching patients to beds",
+      "Inter-hospital capacity sharing via anonymised APIs",
+      "Inventory usage tracking with low-stock alerts",
+      "Operational command view with key metrics for administrators",
+    ],
+    highlights: [
+      { k: "Scope", v: "City-scale, multi-hospital by design" },
+      { k: "Impact", v: "Shorter waits, better bed utilisation" },
+      { k: "Stack", v: "Django REST + React + MySQL" },
+    ],
+    repo: "https://github.com/Interior-Gardener/Hospital-Operations-Sync-Platform",
+    accent: "04",
+  },
+  {
+    slug: "ai-internship-recommendation-engine",
+    title: "AI-Based Internship Recommendation Engine",
+    tag: "Public good · Flask · ML",
+    blurb:
+      "Recommendation engine for the PM Internship Scheme, built for rural, tribal and first-generation learners on low-end phones.",
+    overview:
+      "Built for the PM Internship Scheme, this engine helps students who are usually last in line — rural, tribal and first-generation learners — find internships that actually match them. A three-tier system: a mobile-first React + Vite interface designed for small screens and patchy networks, a Flask API layer that blends rule-based eligibility filters with a lightweight ML ranking model, and MySQL for profiles, listings and stored recommendations. The UI leans on visual cues and bilingual copy (English + Hindi) so it works for users with limited digital exposure.",
+    role: "Full-stack + ML engineer",
+    year: "2026",
+    stack: ["React", "Vite", "Flask", "Python", "MySQL", "scikit-learn"],
+    features: [
+      "Profile capture: education, skills, interests and location",
+      "Hybrid rule-based + lightweight ML recommendation model",
+      "Mobile-first UI with visual cues for low digital literacy",
+      "Regional language support (English + Hindi)",
+      "Flask REST APIs backed by MySQL with reproducible DB init scripts",
+    ],
+    highlights: [
+      { k: "Audience", v: "Underserved first-gen learners" },
+      { k: "Approach", v: "Rules + ML, explainable matches" },
+      { k: "Design", v: "Mobile-first, bilingual, low-bandwidth" },
+    ],
+    repo: "https://github.com/Interior-Gardener/AI-Based_Internship_Recommendation_Engine",
+    accent: "05",
+  },
+  {
     slug: "skill-verse",
     title: "Skill_Verse",
     tag: "Gamified learning · Realtime",
@@ -93,7 +173,7 @@ export const projects: ProjectDetail[] = [
       { k: "Realtime", v: "Socket.IO rooms for co-learning" },
     ],
     repo: "https://github.com/Interior-Gardener/Skill_Verse",
-    accent: "03",
+    accent: "06",
   },
   {
     slug: "studyhub-ai",
@@ -117,7 +197,7 @@ export const projects: ProjectDetail[] = [
       { k: "Stack", v: "React 19 + TypeScript + Mongo" },
     ],
     repo: "https://github.com/Interior-Gardener/StudyHub_with_AI",
-    accent: "04",
+    accent: "07",
   },
   {
     slug: "hospital-management-system",
@@ -142,7 +222,7 @@ export const projects: ProjectDetail[] = [
       { k: "Dashboard", v: "Live bed occupancy & revenue" },
     ],
     repo: "https://github.com/Interior-Gardener/Hospital-Management-System",
-    accent: "05",
+    accent: "08",
   },
   {
     slug: "hospital-readmission-predictor",
@@ -167,7 +247,7 @@ export const projects: ProjectDetail[] = [
       { k: "Explainability", v: "SHAP for every prediction" },
     ],
     repo: "https://github.com/Interior-Gardener/Hospital-Readmission-Predictor-by-Kartik-Verma",
-    accent: "06",
+    accent: "09",
   },
   {
     slug: "sponsor-connector",
@@ -192,7 +272,7 @@ export const projects: ProjectDetail[] = [
       { k: "Security", v: "Helmet + rate limits + Zod" },
     ],
     repo: "https://github.com/Interior-Gardener/Sponsor-Connector",
-    accent: "07",
+    accent: "10",
   },
 ];
 
