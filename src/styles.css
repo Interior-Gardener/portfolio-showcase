@@ -233,3 +233,84 @@ html.light { color-scheme: light; }
     cursor: none !important;
   }
 }
+
+@keyframes kv-ghost-swirl {
+  from { transform: translate(-50%, -50%) translateX(-4px); }
+  to { transform: translate(-50%, -50%) translateX(4px); }
+}
+@keyframes kv-ghost-wave {
+  to { transform: rotate(-20deg); }
+}
+@keyframes kv-ghost-look {
+  0%   { transform: translateX(-2px) rotateY(-10deg); }
+  25%  { transform: translateX(2px) rotateY(10deg); }
+  75%, 100% { transform: translateX(-2px) rotateY(-10deg); }
+}
+
+.kv-ghost {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 100%;
+  animation: kv-ghost-swirl 2s ease-in-out infinite alternate;
+  will-change: left, top;
+}
+.kv-ghost .kv-arms {
+  position: absolute;
+  left: -12%;
+  top: 45%;
+  width: 124%;
+  height: 30%;
+  z-index: -1;
+}
+.kv-ghost .kv-arm {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 100px 0 0 0;
+  border-top: 4px solid var(--color-primary);
+  border-left: 4px solid var(--color-primary);
+  transform-origin: top right;
+  transform: rotate(20deg);
+  opacity: 0.6;
+  animation: kv-ghost-wave 2s ease-in-out infinite alternate;
+}
+.kv-ghost .kv-arm:last-of-type {
+  left: auto;
+  right: 0;
+  transform-origin: top left;
+  border-radius: 0 100px 0 0;
+  border-left: none;
+  border-right: 4px solid var(--color-primary);
+}
+.kv-ghost .kv-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 100%;
+  transform-style: preserve-3d;
+  animation: kv-ghost-look 4s ease-in-out infinite;
+}
+.kv-ghost .kv-mouth {
+  position: absolute;
+  width: 7px;
+  height: 4px;
+  bottom: 22%;
+  left: calc(50% - 3.5px);
+  border-radius: 2px 2px 60px 60px;
+  border-bottom: 1.5px solid var(--color-primary-foreground);
+  border-right: 1.5px solid var(--color-primary-foreground);
+  border-left: 1.5px solid var(--color-primary-foreground);
+}
+.kv-ghost .kv-mouth::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 100%;
+  background: var(--color-primary-foreground);
+  top: -9px;
+  left: -5px;
+  box-shadow: 15px 0 0 var(--color-primary-foreground);
+}
