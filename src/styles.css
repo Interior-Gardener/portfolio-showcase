@@ -252,9 +252,11 @@ html.light { color-scheme: light; }
   left: 0;
   top: 0;
   border-radius: 100%;
+  pointer-events: none !important;
   animation: kv-ghost-swirl 2s ease-in-out infinite alternate;
   will-change: left, top;
 }
+.kv-ghost * { pointer-events: none !important; }
 .kv-ghost .kv-arms {
   position: absolute;
   left: -12%;
