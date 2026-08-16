@@ -40,7 +40,7 @@ export const projects: ProjectDetail[] = [
       { k: "Focus", v: "Immersive learning · UX at booth scale" },
     ],
     repo: "https://github.com/Interior-Gardener/Geoswipe",
-    demo: "https://drive.google.com/file/d/1NzUjonejcssivGZTnOTxkJuZuxzxwtFT/view",
+    demo: "https://drive.google.com/file/d/1Lyut5of0GenXbqDONxnpip1CccRIYmYt/view?usp=drivesdk",
     accent: "01",
   },
   {
