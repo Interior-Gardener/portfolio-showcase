@@ -225,3 +225,11 @@ html.light { color-scheme: light; }
     mix-blend-mode: overlay;
   }
 }
+
+/* ---- Custom cursor ---- */
+@media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
