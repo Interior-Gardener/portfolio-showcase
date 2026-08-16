@@ -114,6 +114,9 @@ function SupportPage() {
             If something I built helped you — a project, a snippet, an idea — a tiny
             contribution keeps me shipping open work.
           </p>
+          <p className="mt-4 text-sm text-foreground/80 max-w-xl border border-primary/30 bg-primary/10 rounded-md px-4 py-3">
+            ☕ The UPI QR code is real and will send money directly to me. The Razorpay button is currently in test mode, so card/netbanking payments here are only demos for now.
+          </p>
 
           <div className="mt-12 grid md:grid-cols-5 gap-8">
             <form onSubmit={handlePay} className="md:col-span-3 p-6 rounded-lg border border-border bg-card/40 space-y-6">
