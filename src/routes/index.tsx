@@ -64,8 +64,16 @@ function Hero() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-8 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.25 }}
+            className="mt-5 max-w-xl text-lg md:text-xl italic text-foreground/80 leading-relaxed border-l-2 border-primary pl-4"
+          >
+            “Turning problems into possibilities, one line at a time.”
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
           >
             Full-stack engineer & AI/ML student building things that ship — from
             steel-plant workflow automation at{" "}
