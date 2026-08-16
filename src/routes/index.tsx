@@ -350,6 +350,10 @@ function About() {
 }
 
 function Skills() {
+  return SkillsInner();
+}
+
+function SkillsInner() {
   const groups = [
     { k: "Languages", v: "C · Java · Python · JavaScript" },
     { k: "Frameworks", v: "React · Node · Express · Flask · Django · Tailwind" },
