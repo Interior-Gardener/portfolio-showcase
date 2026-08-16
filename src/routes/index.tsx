@@ -264,7 +264,7 @@ function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-              className={i < 2 ? "md:col-span-3 lg:col-span-3" : ""}
+              className={i === 0 ? "md:col-span-3" : ""}
             >
             <Link
               to="/projects/$slug"
