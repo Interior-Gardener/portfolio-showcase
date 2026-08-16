@@ -117,13 +117,13 @@ function Hero() {
           transition={{ duration: 0.9, delay: 0.2 }}
           className="md:col-span-4 relative"
         >
-          <div className="aspect-[4/5] relative overflow-hidden rounded-md border border-border">
+          <div className="group aspect-[4/5] relative overflow-hidden rounded-md border border-border">
             <img
               src={kartik}
               alt="Kartik Verma"
-              className="absolute inset-0 h-full w-full object-cover grayscale hover:grayscale-0 transition duration-700"
+              className="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
           </div>
           <div className="mt-3 flex justify-between text-mono text-[10px] uppercase tracking-widest text-muted-foreground">
             <span>Fig. 01</span>
