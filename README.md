@@ -2,7 +2,7 @@
 
 A modern, animated personal portfolio built with **TanStack Start (React 19 + Vite)**, featuring WebGL scenes, a light/dark editorial theme, detailed project case studies, and a Razorpay-powered "Buy me a chai" support page backed by MongoDB.
 
-**Live:** https://kartik-verma.onrender.com/
+**Live:** https://kartikverma.onrender.com/
 > **Note:** The website is hosted on Render's free tier and may take about 50 seconds to a minute to spin up upon the first request. Please be patient!
 
 **GitHub:** https://github.com/Interior-Gardener
