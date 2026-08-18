@@ -2,16 +2,32 @@
 
 A modern, animated personal portfolio built with **TanStack Start (React 19 + Vite)**, featuring WebGL scenes, a light/dark editorial theme, detailed project case studies, and a Razorpay-powered "Buy me a chai" support page backed by MongoDB.
 
-**Live:** _add your deployed URL here_
+**Live:** https://kartik-verma.onrender.com/
+> **Note:** The website is hosted on Render's free tier and may take about 50 seconds to a minute to spin up upon the first request. Please be patient!
+
 **GitHub:** https://github.com/Interior-Gardener
 **LinkedIn:** https://www.linkedin.com/in/kartikverma2204
+
+---
+
+## About Me
+
+I am a Full-Stack and Machine Learning Engineer passionate about building scalable, immersive, and impactful applications. My experience ranges from developing robust enterprise solutions and public-good platforms to crafting interactive 3D web experiences and VR simulations. I thrive on solving complex problems across the stack, whether it's optimizing backend workflows, designing modern UIs, or integrating AI models.
+
+## Portfolio Details
+
+This portfolio is not just a showcase of my projects, but a demonstration of my technical capabilities:
+- **Interactive 3D Elements:** Uses Three.js for interactive WebGL scenes (like the GeoSwipe globe and JSW lattice).
+- **Modern Tech Stack:** Built with TanStack Start, React 19, Tailwind CSS v4, and Framer Motion for a seamless, fast, and highly animated user experience.
+- **Backend & Database:** Features a fully functional backend using typed RPCs (`createServerFn`) and MongoDB for persisting user interactions, such as the "Buy me a chai" support page.
+- **Detailed Case Studies:** Dynamic pages detailing stack breakdowns, features, and challenges for projects like *GeoSwipe*, *Industrial Asset Management*, *Atomix*, *Skill_Verse*, and more.
 
 ---
 
 ## Features
 
 - **Editorial dark/light theme** — hand-built design tokens, Instrument Serif + Inter typography, persisted theme toggle.
-- **Motion throughout** — Framer Motion entrance/scroll animations, animated aurora wash, drifting ember particles, masked engineering grid, scroll-progress bar.
+- **Motion throughout** — Framer Motion entrance/scroll animations, animated aurora wash, drifting লড়াই particles, masked engineering grid, scroll-progress bar.
 - **Three.js scenes** — an interactive point-globe with orbiting markers and arcs (GeoSwipe theme) behind the hero, and a breathing instanced steel lattice (JSW theme) behind the experience section and project pages. Client-only, pointer-reactive, theme-aware, and automatically disabled on mobile or with `prefers-reduced-motion`.
 - **Project case studies** — dynamic `/projects/{slug}` pages with stack breakdowns, feature lists and highlights, sourced from public repos.
 - **Résumé** — inline view plus a one-click download.
@@ -56,3 +72,4 @@ bun install
 cp .env.example .env      # fill in your values
 bun run db:init           # creates the DB, collections and indexes
 bun run dev               # http://localhost:8080
+```
